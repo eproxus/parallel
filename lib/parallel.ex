@@ -7,8 +7,7 @@ defmodule Parallel do
   end
 
   def each(collection, fun, options // []) do
-    acc = {pool(fun, options), [], []}
-    Enumerable.reduce(collection, acc, function(execute/2) )
+    map(collection, fun, options)
     nil
  end
 
