@@ -18,9 +18,8 @@ defmodule ParallelTest do
   end
 
   test :each do
-    IO.puts "each"
     myself = self()
-    collection = [1,2,3,4,5]
+    collection = 1..10
     each(collection, fn i -> myself <- {:test, i} end)
     Enum.each(collection, fn i ->
       receive do
