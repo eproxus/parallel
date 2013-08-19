@@ -1,29 +1,29 @@
 defmodule Parallel do
 
   def map(collection, fun, options // []) do
-    acc = {fun, pool(fun, options), [], []}
-    {_, _, busy, acc} = Enumerable.reduce(collection, acc, function(execute/2) )
+    acc = {pool(fun, options), [], []}
+    {_, busy, acc} = Enumerable.reduce(collection, acc, function(execute/2) )
     List.concat(acc, consume(busy))
   end
 
   def each(collection, fun, options // []) do
-    acc = {fun, pool(fun, options), [], []}
+    acc = {pool(fun, options), [], []}
     Enumerable.reduce(collection, acc, function(execute/2) )
     nil
  end
 
   # Private
 
-  defp execute(item, {fun, free = [], busy, acc}) do
+  defp execute(item, {free = [], busy, acc}) do
     receive do
       {ref, from, result} ->
-        from <- {ref, self(), fun, item}
-        {fun, free, busy, [result|acc]}
+        from <- {ref, self(), item}
+        {free, busy, [result|acc]}
     end
   end
-  defp execute(item, {fun, [worker = {ref, pid}|free], busy, acc}) do
-    pid <- {ref, self(), fun, item}
-    {fun, free, [worker|busy], acc}
+  defp execute(item, {[worker = {ref, pid}|free], busy, acc}) do
+    pid <- {ref, self(), item}
+    {free, [worker|busy], acc}
   end
 
   defp consume(pool) do
@@ -36,7 +36,7 @@ defmodule Parallel do
 
   def worker(fun) do
     receive do
-      {ref, sender, fun, item} when is_function(fun) ->
+      {ref, sender, item} ->
         sender <- {ref, self, fun.(item)}
         worker(fun)
       :exit ->
