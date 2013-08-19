@@ -44,7 +44,7 @@ defmodule Parallel do
   end
 
   defp pool(fun, options) do
-    size = Keyword.get(options, :size) || :erlang.system_info(:schedulers)
+    size = Keyword.get(options, :size) || :erlang.system_info(:schedulers) * 2
     spawn_worker = fn -> {make_ref(), spawn_link(fn -> worker(fun) end)} end
     Stream.repeatedly(spawn_worker) |> Enum.take(size)
   end
