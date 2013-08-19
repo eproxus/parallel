@@ -55,7 +55,9 @@ A library that implements Elixir's `Enum` interface but parallelized.
     - `uniq/2`
     - `with_index/1`
     - `zip/2`
+- Short circuit relevant functions (`any?/2`, `find/3` etc.)
 - Investigate [Stream](http://elixir-lang.org/docs/stable/Stream.html)
   compatibility (option `stream: true`?)
+- Decide on implementing all functions or just relevant ones (e.g. `first/1`)
 - Add documentation
 - Add `link: false` option
