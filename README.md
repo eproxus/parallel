@@ -57,3 +57,5 @@ A library that implements Elixir's `Enum` interface but parallelized.
     - `zip/2`
 - Investigate [Stream](http://elixir-lang.org/docs/stable/Stream.html)
   compatibility (option `stream: true`?)
+- Add documentation
+- Add `link: false` option
