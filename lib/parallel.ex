@@ -1,30 +1,34 @@
 defmodule Parallel do
 
-  def map(list, func, options // []) do
-    list = Enum.to_list(list) # TODO: Can we be generic?
-    len = length(list)
+  def map(collection, fun, options // []) do
+    len = Enumerable.count(collection)
     size = Keyword.get(options, :size) || if(len < 10, do: len, else: 10)
-    pool = pool(size)
-    execute list, func, pool
+    free = pool(size)
+    acc = {fun, free, [], []}
+    {_, _, busy, acc} = Enumerable.reduce(collection, acc, function(execute/2) )
+    List.concat(acc, consume(busy))
   end
 
   # Private
 
-  defp execute(list, func, pool) do execute list, func, pool, [], [] end
-
-  defp execute([], _func, _pool, [], result) do
-    # TODO: Kill pool
-    result
-  end
-  defp execute([item|list], func, [pid|pool], busy, acc) do
-    pid <- {self, func, item}
-    execute list, func, pool, [pid|busy], acc
-  end
-  defp execute(list, func, pool, busy, result) do
+  defp execute(item, {func, free = [], busy, acc}) do
     receive do
-      {from, item} ->
-        execute list, func, [from|pool], List.delete(busy, from), [item|result]
+      {from, result} ->
+        from <- {self(), func, item}
+        {func, free, busy, [result|acc]}
     end
+  end
+  defp execute(item, {func, [pid|free], busy, acc}) do
+    pid <- {self(), func, item}
+    {func, free, [pid|busy], acc}
+  end
+
+  defp consume(pool) do
+    Enum.map(pool, fn pid ->
+      receive do
+        {^pid, result} -> result
+      end
+    end)
   end
 
   defp worker do
@@ -38,7 +42,11 @@ defmodule Parallel do
   end
 
   defp pool(size) do
-    lc pid inlist :lists.seq(1, size), do: spawn_link(function worker/0)
+    Stream.repeatedly(function(spawn_worker/0)) |> Enum.take(size)
+  end
+
+  defp spawn_worker do
+    spawn_link(function(worker/0))
   end
 
 end
