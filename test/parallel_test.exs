@@ -3,24 +3,25 @@ Code.require_file "test_helper.exs", __DIR__
 defmodule ParallelTest do
   use ExUnit.Case
 
+  import EnumCompare
   import Parallel
 
   test :map do
-    assert_map 1..10
+    assert_enum :map, 1..10, &1 + 1, sort: true
   end
 
   test :random_map do
     :random.seed(:erlang.now())
-    Enum.each 1..50, fn(_) ->
+    Enum.each 1..50, fn _ ->
       list = Enum.map 1..50, &:random.uniform/1
-      assert_map list
+      assert_enum :map, list, &1 + 1, sort: true
     end
   end
 
   test :each do
-    myself = self()
+    pid = self()
     collection = 1..10
-    each(collection, fn i -> myself <- {:test, i} end)
+    each(collection, fn i -> pid <- {:test, i} end)
     Enum.each(collection, fn i ->
       receive do
         {:test, ^i} -> :ok
@@ -31,12 +32,7 @@ defmodule ParallelTest do
   end
 
   test :any? do
-    any?([false, true], fn b -> b end)
-  end
-
-  defp assert_map(list) do
-    func = fn(x) -> x + 1 end
-    assert Enum.sort(Enum.map(list, func)) == Enum.sort(map(list, func))
+    assert_enum :any?, [false, true], fn b -> b end
   end
 
 end
