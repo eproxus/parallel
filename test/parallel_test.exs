@@ -12,7 +12,7 @@ defmodule ParallelTest do
   test :random_map do
     :random.seed(:erlang.now())
     Enum.each 1..50, fn(_) ->
-      list = Enum.map 1..50, function :random.uniform/1
+      list = Enum.map 1..50, &:random.uniform/1
       assert_map list
     end
   end
@@ -23,7 +23,7 @@ defmodule ParallelTest do
     each(collection, fn i -> myself <- {:test, i} end)
     Enum.each(collection, fn i ->
       receive do
-        {:test, i} -> :ok
+        {:test, ^i} -> :ok
       after 100 ->
         assert false, "No result received"
       end

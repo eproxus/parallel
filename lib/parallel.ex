@@ -15,9 +15,9 @@ defmodule Parallel do
   # Private
 
   defp run(collection, fun, options, acc, update) do
-    acc = {pool(fun, options), [], acc, update}
-    {_, busy, acc, _} = Enumerable.reduce(collection, acc, function(execute/2))
-    consume(busy, acc, update)
+    state = {pool(fun, options), [], acc, update}
+    {_, busy, state, _} = Enumerable.reduce(collection, state, &execute/2)
+    consume(busy, state, update)
   end
 
   defp execute(item, {free = [], busy, acc, update}) do
