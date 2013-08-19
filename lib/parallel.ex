@@ -1,34 +1,41 @@
 defmodule Parallel do
 
   def map(collection, fun, options // []) do
-    acc = {pool(fun, options), [], []}
-    {_, busy, acc} = Enumerable.reduce(collection, acc, function(execute/2) )
-    List.concat(acc, consume(busy))
+    run(collection, fun, options, [], fn item, acc -> [item|acc] end)
   end
 
   def each(collection, fun, options // []) do
-    map(collection, fun, options)
-    nil
+    run(collection, fun, options, nil, fn _item, nil -> nil end)
+  end
+
+  def any?(collection, fun, options // []) do
+    run(collection, fun, options, false, fn item, value -> item || value end)
   end
 
   # Private
 
-  defp execute(item, {free = [], busy, acc}) do
+  defp run(collection, fun, options, acc, update) do
+    acc = {pool(fun, options), [], acc, update}
+    {_, busy, acc, _} = Enumerable.reduce(collection, acc, function(execute/2))
+    consume(busy, acc, update)
+  end
+
+  defp execute(item, {free = [], busy, acc, update}) do
     receive do
       {ref, from, result} ->
         from <- {ref, self(), item}
-        {free, busy, [result|acc]}
+        {free, busy, update.(result, acc), update}
     end
   end
-  defp execute(item, {[worker = {ref, pid}|free], busy, acc}) do
+  defp execute(item, {[worker = {ref, pid}|free], busy, acc, update}) do
     pid <- {ref, self(), item}
-    {free, [worker|busy], acc}
+    {free, [worker|busy], acc, update}
   end
 
-  defp consume(pool) do
-    Enum.map(pool, fn {ref, pid} ->
+  defp consume(pool, acc, update) do
+    Enum.reduce(pool, acc, fn {ref, pid}, acc ->
       receive do
-        {^ref, ^pid, result} -> result
+        {^ref, ^pid, result} -> update.(result, acc)
       end
     end)
   end

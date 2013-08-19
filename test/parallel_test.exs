@@ -30,6 +30,10 @@ defmodule ParallelTest do
     end)
   end
 
+  test :any? do
+    any?([false, true], fn b -> b end)
+  end
+
   defp assert_map(list) do
     func = fn(x) -> x + 1 end
     assert Enum.sort(Enum.map(list, func)) == Enum.sort(map(list, func))
