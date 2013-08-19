@@ -21,7 +21,7 @@ A library that implements Elixir's `Enum` interface but parallelized.
     - `count/2`
     - `drop/2`
     - `drop_while/2`
-    - ~~`each/2`~~
+    - ~~`each/2`~~ **Done**
     - `empty?/1`
     - `fetch/2`
     - `fetch!/2`
@@ -32,7 +32,7 @@ A library that implements Elixir's `Enum` interface but parallelized.
     - `find_value/3`
     - `first/1`
     - `join/2`
-    - ~~`map/2`~~
+    - ~~`map/2`~~ **Done**
     - `map_join/3`
     - `map_reduce/3`
     - `max/1`
