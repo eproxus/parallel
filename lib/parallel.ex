@@ -9,7 +9,7 @@ defmodule Parallel do
   def each(collection, fun, options // []) do
     map(collection, fun, options)
     nil
- end
+  end
 
   # Private
 
