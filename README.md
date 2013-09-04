@@ -15,7 +15,7 @@ A library that implements Elixir's `Enum` interface but parallelized.
 
 - Implement all Enum functions
     - `all?/2`
-    - `any?/2`
+    - ~~`any?/2`~~ **Done**
     - `at/3`
     - `count/1`
     - `count/2`
