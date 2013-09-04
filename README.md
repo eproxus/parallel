@@ -61,3 +61,4 @@ A library that implements Elixir's `Enum` interface but parallelized.
 - Decide on implementing all functions or just relevant ones (e.g. `first/1`)
 - Add documentation
 - Add `link: false` option
+- Add `sorted: true` option
