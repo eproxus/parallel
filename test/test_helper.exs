@@ -3,7 +3,7 @@ ExUnit.start
 defmodule EnumCompare do
   use ExUnit.Case
 
-  defmacro assert_enum(function, collection, fun, options // []) do
+  defmacro assert_enum(function, collection, fun, options \\ []) do
     parallel = quote do
       Parallel.unquote(function)(unquote(collection), unquote(fun))
     end
