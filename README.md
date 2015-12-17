@@ -14,47 +14,76 @@ A library that implements Elixir's `Enum` interface but parallelized.
 # TODO
 
 * [ ] Implement all Enum functions
-    * [x] `all?/2`
-    * [x] `any?/2`
-    * [ ] `at/3`
-    * [ ] `count/1`
-    * [ ] `count/2`
-    * [ ] `drop/2`
-    * [ ] `drop_while/2`
-    * [x] `each/2`
-    * [ ] `empty?/1`
-    * [ ] `fetch/2`
-    * [ ] `fetch!/2`
-    * [ ] `filter/2`
-    * [ ] `filter_map/3`
-    * [ ] `find/3`
-    * [ ] `find_index/2`
-    * [ ] `find_value/3`
-    * [ ] `first/1`
-    * [ ] `join/2`
-    * [x] `map/2`
-    * [ ] `map_join/3`
-    * [ ] `map_reduce/3`
-    * [ ] `max/1`
-    * [ ] `max/2`
-    * [ ] `member?/2`
-    * [ ] `min/1`
-    * [ ] `min/2`
-    * [ ] `partition/2`
-    * [ ] `reduce/3`
-    * [ ] `reject/2`
-    * [ ] `reverse/1`
-    * [ ] `shuffle/1`
-    * [ ] `sort/1`
-    * [ ] `sort/2`
-    * [ ] `split/2`
-    * [ ] `split_while/2`
-    * [ ] `take/2`
-    * [ ] `take_while/2`
-    * [ ] `to_list/1`
-    * [ ] `uniq/2`
-    * [ ] `with_index/1`
-    * [ ] `zip/2`
+  * [x] `all?(collection, fun \\ fn x -> x end)`
+  * [x] `any?(collection, fun \\ fn x -> x end)`
+  * [ ] `at(collection, n, default \\ nil)`
+  * [ ] `chunk(collection, n)`
+  * [ ] `chunk(collection, n, step, pad \\ nil)`
+  * [ ] `chunk_by(collection, fun)`
+  * [ ] `concat(enumerables)`
+  * [ ] `concat(left, right)`
+  * [ ] `count(collection)`
+  * [ ] `count(collection, fun)`
+  * [ ] `dedup(collection)`
+  * [ ] `dedup_by(collection, fun)`
+  * [ ] `drop(collection, count)`
+  * [ ] `drop_while(collection, fun)`
+  * [x] `each(collection, fun)`
+  * [ ] `empty?(collection)`
+  * [ ] `fetch(collection, n)`
+  * [ ] `fetch!(collection, n)`
+  * [ ] `filter(collection, fun)`
+  * [ ] `filter_map(collection, filter, mapper)`
+  * [ ] `find(collection, default \\ nil, fun)`
+  * [ ] `find_index(collection, fun)`
+  * [ ] `find_value(collection, default \\ nil, fun)`
+  * [ ] `flat_map(collection, fun)`
+  * [ ] `flat_map_reduce(collection, acc, fun)`
+  * [ ] `group_by(collection, dict \\ %{}, fun)`
+  * [ ] `intersperse(collection, element)`
+  * [ ] `into(collection, list)`
+  * [ ] `into(collection, list, transform)`
+  * [ ] `join(collection, joiner \\ "")`
+  * [x] `map(collection, fun)`
+  * [ ] `map_join(collection, joiner \\ "", mapper)`
+  * [ ] `map_reduce(collection, acc, fun)`
+  * [ ] `max(collection)`
+  * [ ] `max_by(collection, fun)`
+  * [ ] `member?(collection, value)`
+  * [ ] `min(collection)`
+  * [ ] `min_by(collection, fun)`
+  * [ ] `min_max(collection)`
+  * [ ] `min_max_by(collection, fun)`
+  * [ ] `partition(collection, fun)`
+  * [ ] `random(collection)`
+  * [ ] `reduce(collection, fun)`
+  * [ ] `reduce(collection, acc, fun)`
+  * [ ] `reduce_while(collection, acc, fun)`
+  * [ ] `reject(collection, fun)`
+  * [ ] `reverse(collection)`
+  * [ ] `reverse(collection, tail)`
+  * [ ] `reverse_slice(collection, start, count)`
+  * [ ] `scan(enum, fun)`
+  * [ ] `scan(enum, acc, fun)`
+  * [ ] `shuffle(collection)`
+  * [ ] `slice(collection, range)`
+  * [ ] `slice(collection, start, count)`
+  * [ ] `sort(collection)`
+  * [ ] `sort(collection, fun)`
+  * [ ] `sort_by(collection, mapper, sorter \\ &<=/2)`
+  * [ ] `split(collection, count)`
+  * [ ] `split_while(collection, fun)`
+  * [ ] `sum(collection)`
+  * [ ] `take(collection, count)`
+  * [ ] `take_every(collection, nth)`
+  * [ ] `take_random(collection, count)`
+  * [ ] `take_while(collection, fun)`
+  * [ ] `to_list(collection)`
+  * [ ] `uniq(collection)`
+  * [ ] `uniq_by(collection, fun)`
+  * [ ] `unzip(collection)`
+  * [ ] `with_index(collection)`
+  * [ ] `zip(collection1, collection2)`
 * [ ] Short circuit relevant functions (`any?/2`, `find/3` etc.)
 * [ ] Investigate [Stream](http://elixir-lang.org/docs/stable/Stream.html)
   compatibility (option `stream: true`?)
