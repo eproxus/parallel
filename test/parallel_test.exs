@@ -36,4 +36,8 @@ defmodule ParallelTest do
     assert_enum :any?, [false, true], fn b -> b end
   end
 
+  test :all? do
+    assert_enum :all?, [false, true], fn b -> b end
+  end
+
 end

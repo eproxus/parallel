@@ -12,6 +12,10 @@ defmodule Parallel do
     run(collection, fun, options, false, fn item, value -> item || value end)
   end
 
+  def all?(collection, fun, options \\ []) do
+    run(collection, fun, options, true, fn item, value -> item && value end)
+  end
+
   # Private
 
   defp run(collection, fun, options, acc, update) do
