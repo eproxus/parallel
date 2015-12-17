@@ -1,4 +1,4 @@
-ExUnit.start
+ExUnit.start()
 
 defmodule EnumCompare do
   use ExUnit.Case
@@ -17,4 +17,3 @@ defmodule EnumCompare do
     quote do: assert unquote(enum) == unquote(parallel)
   end
 end
-

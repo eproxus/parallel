@@ -2,6 +2,7 @@ Code.require_file "test_helper.exs", __DIR__
 
 defmodule ParallelTest do
   use ExUnit.Case
+  doctest Parallel
 
   import EnumCompare
   import Parallel
