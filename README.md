@@ -13,52 +13,52 @@ A library that implements Elixir's `Enum` interface but parallelized.
 
 # TODO
 
-- Implement all Enum functions
-    - `all?/2`
-    - ~~`any?/2`~~ **Done**
-    - `at/3`
-    - `count/1`
-    - `count/2`
-    - `drop/2`
-    - `drop_while/2`
-    - ~~`each/2`~~ **Done**
-    - `empty?/1`
-    - `fetch/2`
-    - `fetch!/2`
-    - `filter/2`
-    - `filter_map/3`
-    - `find/3`
-    - `find_index/2`
-    - `find_value/3`
-    - `first/1`
-    - `join/2`
-    - ~~`map/2`~~ **Done**
-    - `map_join/3`
-    - `map_reduce/3`
-    - `max/1`
-    - `max/2`
-    - `member?/2`
-    - `min/1`
-    - `min/2`
-    - `partition/2`
-    - `reduce/3`
-    - `reject/2`
-    - `reverse/1`
-    - `shuffle/1`
-    - `sort/1`
-    - `sort/2`
-    - `split/2`
-    - `split_while/2`
-    - `take/2`
-    - `take_while/2`
-    - `to_list/1`
-    - `uniq/2`
-    - `with_index/1`
-    - `zip/2`
-- Short circuit relevant functions (`any?/2`, `find/3` etc.)
-- Investigate [Stream](http://elixir-lang.org/docs/stable/Stream.html)
+* [ ]Implement all Enum functions
+    * [ ] `all?/2`
+    * [x] `any?/2`
+    * [ ] `at/3`
+    * [ ] `count/1`
+    * [ ] `count/2`
+    * [ ] `drop/2`
+    * [ ] `drop_while/2`
+    * [x] `each/2`
+    * [ ] `empty?/1`
+    * [ ] `fetch/2`
+    * [ ] `fetch!/2`
+    * [ ] `filter/2`
+    * [ ] `filter_map/3`
+    * [ ] `find/3`
+    * [ ] `find_index/2`
+    * [ ] `find_value/3`
+    * [ ] `first/1`
+    * [ ] `join/2`
+    * [x] `map/2`
+    * [ ] `map_join/3`
+    * [ ] `map_reduce/3`
+    * [ ] `max/1`
+    * [ ] `max/2`
+    * [ ] `member?/2`
+    * [ ] `min/1`
+    * [ ] `min/2`
+    * [ ] `partition/2`
+    * [ ] `reduce/3`
+    * [ ] `reject/2`
+    * [ ] `reverse/1`
+    * [ ] `shuffle/1`
+    * [ ] `sort/1`
+    * [ ] `sort/2`
+    * [ ] `split/2`
+    * [ ] `split_while/2`
+    * [ ] `take/2`
+    * [ ] `take_while/2`
+    * [ ] `to_list/1`
+    * [ ] `uniq/2`
+    * [ ] `with_index/1`
+    * [ ] `zip/2`
+* [ ] Short circuit relevant functions (`any?/2`, `find/3` etc.)
+* [ ] Investigate [Stream](http://elixir-lang.org/docs/stable/Stream.html)
   compatibility (option `stream: true`?)
-- Decide on implementing all functions or just relevant ones (e.g. `first/1`)
-- Add documentation
-- Add `link: false` option
-- Add `sorted: true` option
+* [ ] Decide on implementing all functions or just relevant ones (e.g. `first/1`)
+* [ ] Add documentation
+* [ ] Add `link: false` option
+* [ ] Add `sorted: true` option
