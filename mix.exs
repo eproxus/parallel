@@ -4,7 +4,7 @@ defmodule Parallel.Mixfile do
   def project do
     [ app: :parallel,
       version: "0.0.1",
-      deps: deps ]
+      deps: deps() ]
   end
 
   # Configuration for the OTP application
