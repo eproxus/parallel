@@ -47,7 +47,7 @@ defmodule Parallel do
   def worker(fun) do
     receive do
       {ref, sender, item} ->
-        send(sender, {ref, self, fun.(item)})
+        send(sender, {ref, self(), fun.(item)})
         worker(fun)
       :exit ->
         :ok
